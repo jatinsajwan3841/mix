@@ -1,4 +1,12 @@
-def basec(num,base):
+res = []
+def basec(n, b):
+    if n < b:
+        res.append(n)
+        res.reverse()
+        return res
+    res.append(n % b)
+    return baseC(int(n/b), b)
+'''def basec(num,base):
     if num < base:
         return [int(num%base)]
     res = []
@@ -9,7 +17,7 @@ def basec(num,base):
         if num < base:
             res.append(num)
             res.reverse()
-            return res
+            return res'''
 def fullbasec():
     num = int(input("num : "))
     base = int(input("base : "))
