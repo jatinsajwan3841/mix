@@ -1,11 +1,20 @@
-res = []
-def basec(n, b):
+def fullBaseC(n, b):
     if n < b:
-        res.append(n)
-        res.reverse()
-        return res
-    res.append(n % b)
-    return baseC(int(n/b), b)
+        if n % b > 9:
+            return chr(n+55)
+        return str(n)
+    if n % b > 9:
+        return fullBaseC(n//b, b) + chr((n % b)+55)
+    return fullBaseC(n//b, b) + str(n % b)
+
+
+num = int(input("num : "))
+base = int(input("base : "))
+
+print(fullBaseC(num, base))
+
+
+
 '''def basec(num,base):
     if num < base:
         return [int(num%base)]
@@ -17,7 +26,7 @@ def basec(n, b):
         if num < base:
             res.append(num)
             res.reverse()
-            return res'''
+            return res
 def fullbasec():
     num = int(input("num : "))
     base = int(input("base : "))
@@ -27,4 +36,4 @@ def fullbasec():
             result[index] = chr(val+55)  
     return result            
 
-print(*fullbasec())
+print(*fullbasec())'''
