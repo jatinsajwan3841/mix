@@ -50,7 +50,7 @@ class LL:
             return
         prev = node
         node = prev.next
-        while node is not None:
+        while node:
             if node.data == key:
                 prev.next = node.next
                 del node
@@ -58,6 +58,34 @@ class LL:
             prev = node
             node = node.next
         print("Key not found")
+
+    def reverse(self):
+        if self.head == None:
+            print("Empty LL")
+            return
+        prev = None
+        node = self.head
+        while node:
+            next = node.next
+            node.next = prev
+            prev = node
+            node = next
+        self.head = prev
+
+    def reverseRec(self):
+        if self.head == None:
+            print("Empty LL")
+            return
+        self.reverseRecUtil(None, self.head)
+
+    def reverseRecUtil(self, prev, node):
+        if node.next == None:
+            self.head = node
+            node.next = prev
+            return
+        next = node.next
+        node.next = prev
+        self.reverseRecUtil(node, next)
 
     def __repr__(self):
         node = self.head
@@ -80,4 +108,8 @@ print(l1)
 l1.pushAfter(2, 5)
 print(l1)
 l1.pop(2)
+print(l1)
+l1.reverse()
+print(l1)
+l1.reverseRec()
 print(l1)
