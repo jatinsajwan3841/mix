@@ -1,61 +1,83 @@
 class Node:
-    def __init__(self, data=None):
+    def __init__(self, data):
         self.data = data
         self.next = None
 
-class LinkedList:
+    def __repr__(self):
+        return self.data
+
+
+class LL:
     def __init__(self):
         self.head = None
 
-    def traverse(self):
-        temp = self.head
-        while temp:
-            print(temp.data, end='=>')
-            temp = temp.next
+    def push(self, data):
+        if self.head == None:
+            self.head = Node(data)
+        else:
+            node = self.head
+            while node.next is not None:
+                node = node.next
+            node.next = Node(data)
 
-    def insertBeg(self, newData):
-        newNode = Node(newData)
+    def pushFront(self, data):
+        newNode = Node(data)
         newNode.next = self.head
         self.head = newNode
 
-    def insertEnd(self, newData):
-        newNode = Node(newData)
+    def pushAfter(self, key, data):
         if self.head == None:
-            self.head = newNode
+            print("empty ll")
             return
-        last = self.head
-        while last.next:
-            last = last.next
-        last.next = newNode
+        node = self.head
+        while node:
+            if node.data == key:
+                newNode = Node(data)
+                newNode.next = node.next
+                node.next = newNode
+                return
+            node = node.next
+        print("Element not found")
 
-    def remove(self, key):
-        temp = self.head
-        if temp == None:
-            print('empty LL')
+    def pop(self, key):
+        if self.head == None:
+            print("Empty LL")
             return
-        if temp.data == key:
-            self.head = temp.next
-            temp = None
+        node = self.head
+        if node.data == key:
+            self.head = node.next
+            del node
             return
-        while temp:
-            if temp.data == key:
-                break
-            prev = temp
-            temp = temp.next
-        if temp == None:
-            return
-        prev.next = temp.next
-        temp = None
+        prev = node
+        node = prev.next
+        while node is not None:
+            if node.data == key:
+                prev.next = node.next
+                del node
+                return
+            prev = node
+            node = node.next
+        print("Key not found")
 
-LL = LinkedList()
-LL.head = Node(1)
-second = Node(2)
-third = Node(3)
-LL.head.next = second
-second.next = third
+    def __repr__(self):
+        node = self.head
+        nodes = []
+        while node:
+            nodes.append(str(node.data))
+            node = node.next
+        nodes.append('None')
+        return "->".join(nodes)
 
-LL.traverse()
-LL.insertBeg(int(input()))
-LL.insertEnd(int(input()))
-LL.remove(int(input()))
-LL.traverse()
+
+l1 = LL()
+print(l1)
+l1.push(1)
+print(l1)
+l1.push(2)
+print(l1)
+l1.pushFront(3)
+print(l1)
+l1.pushAfter(2, 5)
+print(l1)
+l1.pop(2)
+print(l1)
